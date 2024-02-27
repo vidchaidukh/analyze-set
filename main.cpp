@@ -96,6 +96,12 @@ tuple<vector<int>, vector<int>> findSequences(vector<int> vec){
             descend_curr.push_back(i);
         }
     }
+    if (size(ascend_curr) > size(ascend_max)){
+        ascend_max = ascend_curr;
+    }  
+    if (size(descend_curr) > size(descend_max)){
+        descend_max = descend_curr;
+    } 
     return {ascend_max, descend_max};
 }
 
@@ -116,7 +122,7 @@ double getMedian(vector<int> &vec, int vec_size){
         return vec[vec_size/2];
     }else{
         // if amount is even return half sum of central nums
-        return (vec[vec_size/2]+vec[vec_size/2+1])/2.0;
+        return (vec[vec_size/2-1]+vec[vec_size/2])/2.0;
     }
 }
 
@@ -150,12 +156,11 @@ int main() {
 
     // sort vector in place
     quickSort(numbers, 0, numbers_size-1);
-
     // display desired values
     cout << " 1. Max: " << numbers.back() << endl;
     cout << " 2. Min: " << numbers.front() << endl;
-    cout << " 3. Median: " << getMedian(numbers, numbers_size) << endl;
-    cout << " 4. Arithmetic mean: " << fixed << setprecision(12) << arithmetic_mean << endl;
+    cout << " 3. Median: " << setprecision(numeric_limits<double>::digits10 + 1) << getMedian(numbers, numbers_size) << endl;
+    cout << " 4. Arithmetic mean: " << arithmetic_mean << endl;
     cout << " 5. Ascending sequence: ";
     printVector(longest_ascending);
     cout << " 6. Descending sequence: ";
