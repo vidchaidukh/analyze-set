@@ -41,16 +41,16 @@ def get_median(num_list):
 
 # function of finding the longest ascending and descending sequences
 def find_sequences(num_list):
-    # num_lists to store current sequences
+    # lists to store current sequences
     ascend_curr = [num_list[0]]
     descend_curr = [num_list[0]]
 
-    # num_lists for the longest sequences
+    # lists for the longest sequences
     ascend_max = []
     descend_max = []
 
     for i in num_list[1:]:
-        # if sequnce go further, add current element to temp num_list
+        # if sequnce go further, add current element to current seq list
         if i > ascend_curr[-1]:
             ascend_curr.append(i)
         # if element is smaller, compare length of current seq to previous longest seq
@@ -77,7 +77,8 @@ nums = [int(n) for n in file]
 
 # find ascending and descending sequences
 sequences = find_sequences(nums)
-# sort num_list on place
+
+# sort list on place
 quick_sort(nums, 0, len(nums)-1)
 
 # show desired values
