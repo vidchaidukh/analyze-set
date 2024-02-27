@@ -39,7 +39,7 @@ int quickSort(vector<int> &num_vector, int left, int right){
             bigger_ind++;
         }
     }
-    
+
     // swap the pivot element with the first greater element
     swap(num_vector[bigger_ind], num_vector[right]);
 
@@ -99,6 +99,16 @@ tuple<vector<int>, vector<int>> findSequences(vector<int> vec){
     return {ascend_max, descend_max};
 }
 
+// function for calculating arithmetic mean
+long double getMean(vector<int> vec, int vec_size){
+    // long long int for storing sum
+    long long int vec_sum = 0;
+    for (int i:vec){
+        vec_sum += i;
+    }
+
+    return vec_sum/double(vec_size);
+}
 // function for determening the median of array
 double getMedian(vector<int> &vec, int vec_size){
     // if num_list has odd amount of numbers return middle num
@@ -130,20 +140,25 @@ int main() {
     while (file >> i) {
         numbers.push_back(i);
     }
+    int numbers_size = size(numbers);
 
     // find the longest ascending and descending sequences in original list
     auto [longest_ascending, longest_descending] = findSequences(numbers); 
 
+    // calculate arithmetic mean
+    long double arithmetic_mean = getMean(numbers, numbers_size);
+
     // sort vector in place
-    quickSort(numbers, 0, size(numbers)-1);
+    quickSort(numbers, 0, numbers_size-1);
 
     // display desired values
-    cout << " Max: " << numbers.back() << endl;
-    cout << " Min: " << numbers.front() << endl;
-    cout << " Median: " << getMedian(numbers, size(numbers)) << endl;
-    cout << " Ascending sequence: ";
+    cout << " 1. Max: " << numbers.back() << endl;
+    cout << " 2. Min: " << numbers.front() << endl;
+    cout << " 3. Median: " << getMedian(numbers, numbers_size) << endl;
+    cout << " 4. Arithmetic mean: " << fixed << setprecision(12) << arithmetic_mean << endl;
+    cout << " 5. Ascending sequence: ";
     printVector(longest_ascending);
-    cout << " Descending sequence: ";
+    cout << " 6. Descending sequence: ";
     printVector(longest_descending);
     
     // get end time 
@@ -151,5 +166,5 @@ int main() {
     
     // calculate and display time taken by program
     auto f_secs = duration_cast<duration<float>>(end_time-st_time);
-    cout << " • time of execution: " << f_secs.count() << "s\n";
+    cout << " • time of execution: " << fixed << setprecision(3) << f_secs.count() << "s\n";
 }

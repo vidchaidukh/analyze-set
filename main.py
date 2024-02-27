@@ -70,6 +70,13 @@ def find_sequences(num_list):
             descend_curr = [i]
     return ascend_max, descend_max
 
+# function for calculating arithmetic mean
+def get_mean(num_list):
+    list_sum = 0
+    for i in num_list:
+        list_sum = list_sum + i
+    return list_sum/len(num_list)
+
 # read a file and split by strings
 file = open('10m.txt').read().splitlines()
 # convert elements to integers
@@ -78,13 +85,15 @@ nums = [int(n) for n in file]
 # find ascending and descending sequences
 sequences = find_sequences(nums)
 
+# calculate arithmetic mean
+arithmetic_mean = get_mean(nums)
+
 # sort list on place
 quick_sort(nums, 0, len(nums)-1)
 
 # show desired values
-print(" Max is {} \n Min is {} \n Median is {} \n Ascending sequence: {} \n Descending sequence: {}".
-      format(nums[-1], nums[0], get_median(nums), *sequences))
+print(" 1. Max is {} \n 2. Min is {} \n 3. Median is {} \
+      \n 4. Arithmetic mean is {} \n 5. Ascending sequence: {} \n 6. Descending sequence: {}".
+      format(nums[-1], nums[0], get_median(nums), arithmetic_mean, *sequences))
 # show execution time
 print(" • time of execution: {:.3f}s ".format(time.time()-start))
-
-
